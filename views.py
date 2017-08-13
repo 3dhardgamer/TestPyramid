@@ -13,7 +13,7 @@ def home_view(request):
 @view_config(route_name = 'quotes')
 def quotes(request):
     body = apicon.get_quotes()
-    return Response(body)
+    return Response(body))
 
 @view_config(route_name = 'pick_quote')
 def pick_quote(request):
