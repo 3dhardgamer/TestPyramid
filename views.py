@@ -21,3 +21,6 @@ def pick_quote(request):
     return Response(body)
 
 @view_config(route_name = 'random_quote')
+def random_quote(request):
+    body = apicon.get_quotes()
+    return Response(body)
