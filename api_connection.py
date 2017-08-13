@@ -1,3 +1,11 @@
+'''
+First Geru's Challenge:
+to create a lib to connect to the API at the following address:
+
+https://1c22eh3aj8.execute-api.us-east-1.amazonaws.com/challenge/quotes
+
+'''
+
 import requests
 import json
 
