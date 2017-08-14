@@ -22,4 +22,4 @@ def get_quotes():
 def get_quote(quote_id):
     '''get_quote receives an integer related to the quote desired.
        quote index start from 0 (zero)!'''
-    return requests.get(main_quotes_path('/quotes/{:d}/'.format(int(quote_id)))).json()
+    return requests.get(main_quotes_path('/quotes/{}'.format(quote_id))).json()
