@@ -1,6 +1,7 @@
 import cgi
 import api_connection as apicon
 
+from random import choice
 from pyramid.httpexceptions import HTTPFound
 from pyramid.response import Response
 from pyramid.view import view_config
@@ -12,15 +13,21 @@ def home_view(request):
 
 @view_config(route_name = 'quotes')
 def quotes(request):
-    body = apicon.get_quotes()
-    return Response(body))
+    body = apicon.get_quotes()['quotes']
+    bodyhtml = '<ul>'
+    for x in body:
+        bodyhtml += '<li>{}</li>'.format(x)
+    bodyhtml += '</ul>'
+    return Response(bodyhtml)
 
 @view_config(route_name = 'pick_quote')
 def pick_quote(request):
-    body = apicon.get_quote('%(name)s' % request.matchdict)
-    return Response(body)
+    body = apicon.get_quote(request.matchdict['quote_number'])['quote']
+    bodyhtml = '<ul><li>{}</li></ul>'.format(body)
+    return Response(bodyhtml)
 
 @view_config(route_name = 'random_quote')
 def random_quote(request):
-    body = apicon.get_quotes()
-    return Response(body)
+    body = apicon.get_quotes()['quotes']
+    bodyhtml = '<ul><li>{}</li></ul>'.format(choice(body))
+    return Response(bodyhtml)
