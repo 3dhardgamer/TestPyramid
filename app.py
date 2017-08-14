@@ -2,6 +2,7 @@ from wsgiref.simple_server import make_server
 from pyramid.config import Configurator
 
 if __name__ == '__main__':
+    print ('Opening routes...')
     with Configurator() as config:
         config.add_route('home', '/')
         config.add_route('quotes', '/quotes')
@@ -9,5 +10,6 @@ if __name__ == '__main__':
         config.add_route('random_quote', '/quotes/random')
         config.scan('views')
         app = config.make_wsgi_app()
+    print('Connected to server')
     server = make_server('0.0.0.0', 1234, app)
     server.serve_forever()
