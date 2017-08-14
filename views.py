@@ -1,7 +1,7 @@
 import cgi
 import api_connection as apicon
+import random
 
-from random import choice
 from pyramid.httpexceptions import HTTPFound
 from pyramid.response import Response
 from pyramid.view import view_config
@@ -22,12 +22,13 @@ def quotes(request):
 
 @view_config(route_name = 'pick_quote')
 def pick_quote(request):
-    body = apicon.get_quote(request.matchdict['quote_number'])['quote']
-    bodyhtml = '<ul><li>{}</li></ul>'.format(body)
-    return Response(bodyhtml)
-
-@view_config(route_name = 'random_quote')
-def random_quote(request):
-    body = apicon.get_quotes()['quotes']
-    bodyhtml = '<ul><li>{}</li></ul>'.format(choice(body))
+    q = request.matchdict['quote_number']
+    bodytempl = '<ul><li>{}</li></ul>'
+    if q == 'random':
+        body = apicon.get_quotes()['quotes']
+        index = random.randint(0, len(body) - 1)
+        bodyhtml = bodytempl.format(body[index])
+    else:
+        body = apicon.get_quote(q)['quote']
+        bodyhtml = bodytempl.format(body)
     return Response(bodyhtml)
