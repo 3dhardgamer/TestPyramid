@@ -4,6 +4,8 @@ Main application:
     - Before running this program make sure to run db_creation.py first.
       In case you have already done it, you are good to go! :)
 
+    - Install geruquote lib from geruquote folder.
+
     - Pyramid app is created:
         - routes are defined
         - views are called from views.py
